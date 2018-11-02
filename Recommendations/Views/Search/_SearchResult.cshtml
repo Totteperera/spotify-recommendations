@@ -1,0 +1,73 @@
+﻿@model Recommendations.Models.SearchResultViewModel
+@{
+    Layout = null;
+}
+
+<div class="api-result">
+    
+    <h1 class="api-result__title">Sökresultat på "@Model.SearchString"</h1>
+
+    <div class="api-result__title-wrapper">
+            <h2 class="api-result__section-title">Låtar</h2>
+    </div>
+    <div class="api-result__section-wrapper">
+        @foreach (var tracksItem in Model.SearchResult.Tracks.Items)
+        {
+            var image = tracksItem.Album.Images.FirstOrDefault();
+            var imageUrl = image != null ? image.Url : @"/Content/Image/music.png";
+            <a href="@tracksItem.ExternUrls.Values.FirstOrDefault()" class="api-result__item">
+                <img class="api-result__item-img" src="@imageUrl" />
+                <p class="api-result__item-name">@tracksItem.Name</p>
+            </a>
+        }
+    </div>
+    <div class="api-result__title-wrapper">
+            <h2 class="api-result__title">Album</h2>
+    </div>
+    <div class="api-result__section-wrapper">
+
+        @foreach (var albumsItem in Model.SearchResult.Albums.Items)
+        {
+            var image = albumsItem.Images.FirstOrDefault();
+            var imageUrl = image != null ? image.Url : @"/Content/Image/music.png";
+            <a href="@albumsItem.ExternalUrls.Values.FirstOrDefault()" class="api-result__item">
+                <img class="api-result__item-img" src="@imageUrl" />
+                <p class="api-result__item-name">@albumsItem.Name</p>
+            </a>
+        }
+    </div>
+    
+    <div class="api-result__title-wrapper">
+        <h2 class="api-result__title">Artister</h2>
+    </div>
+    <div class="api-result__section-wrapper">
+
+        @foreach (var artistsItem in Model.SearchResult.Artists.Items)
+        {
+            var image = artistsItem.Images.FirstOrDefault();
+            var imageUrl =  image != null ? image.Url : @"/Content/Image/music.png";
+        <a href="@artistsItem.ExternalUrls.Values.FirstOrDefault()" class="api-result__item">
+            <img class="api-result__item-img" src="@imageUrl" />
+            <p class="api-result__item-name">@artistsItem.Name</p>
+        </a>
+        }
+    </div>
+    
+    <div class="api-result__title-wrapper">
+        <h2 class="api-result__title">Spellistor</h2>
+    </div>
+    <div class="api-result__section-wrapper">
+
+        @foreach (var playlistsItem in Model.SearchResult.Playlists.Items)
+        {
+            var image = playlistsItem.Images.FirstOrDefault();
+            var imageUrl = image != null ? image.Url : @"/Content/Image/music.png";
+            <a href="@playlistsItem.ExternalUrls.Values.FirstOrDefault()" class="api-result__item">
+                <img class="api-result__item-img" src="@imageUrl" />
+                <p class="api-result__item-name">@playlistsItem.Name</p>
+            </a>
+        }
+    </div>
+
+</div>
+

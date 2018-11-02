@@ -1,0 +1,9 @@
+﻿@{
+    Layout = null;
+}
+<header class="header">
+    <div class="header__search-wrapper">
+        <input type="text" placeholder="Sök bland artister, album, spellistor och låtar" class="js-search-input header__search-input"/>
+        <button type="submit" class="js-search-submit button button__header" data-search-request-url="@Url.Action("Search","Search")">Sök</button>
+    </div>
+</header>

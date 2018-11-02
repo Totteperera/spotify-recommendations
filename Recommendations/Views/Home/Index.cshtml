@@ -1,0 +1,68 @@
+﻿@model Recommendations.Models.StartPageViewModel
+
+
+<h2 class="section__genre-title">Rekommendationer</h2>
+<p class="section__genre-text">Välj vilka genrer du vill få rekommendation om. Reglera om du vill ha t.ex. instrumental, ledsen, dansbar musik och om den ska vara populär eller inte</p>
+<section class="section__genre">
+    @if (Model.Genres != null && Model.Genres.Any())
+    {
+        <div class="dropdown-menu js-dropdown-menu">
+            Välj genre
+            <ul class="dropdown-menu__wrapper js-dropdown-menu-wrapper">
+                @foreach (var item in Model.Genres)
+                {
+                    <li class="dropdown-menu__item">
+                        <a class="dropdown-menu__item-link js-dropdown-item-link" data-value="@item">
+                            @item
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+        <div class="js-selected-genres selected-genres">
+
+        </div>
+    }
+</section>
+<hr class="section__break" />
+<section class="section__slides">
+    <div class="section__slides-wrapper">
+        <i class="svg-icon svg-icon--mic"></i>
+        <div class="slidecontainer">
+            <input type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider js-instrumentalness" id="instrumentalness">
+        </div>
+        <i class="svg-icon svg-icon--guitar"></i>
+    </div>
+
+    <div class="section__slides-wrapper">
+        <i class="svg-icon svg-icon--no-dance"></i>
+        <div class="slidecontainer">
+            <input type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider js-danceability" id="danceability">
+        </div>
+        <i class="svg-icon svg-icon--dance"></i>
+    </div>
+</section>
+<section class="section__slides">
+    <div class="section__slides-wrapper">
+        <i class="svg-icon svg-icon--sad"></i>
+        <div class="slidecontainer">
+            <input type="range" min="0.0" max="1.0" value="0.5" step="0.1" class="slider js-valence" id="valence">
+        </div>
+        <i class="svg-icon svg-icon--happy"></i>
+    </div>
+
+    <div class="section__slides-wrapper">
+        <i class="svg-icon svg-icon--thumbs-down"></i>
+        <div class="slidecontainer">
+            <input type="range" min="1" max="100" value="50" class="slider js-popularity" id="popularity">
+        </div>
+        <i class="svg-icon svg-icon--thumbs-up"></i>
+    </div>
+</section>
+
+<section class="section__button">
+    <button class="button js-button-get-recommendations" data-request-url="@Url.Action("GetRecommendations","Recommendations")">Hämta min rekommendation</button>
+</section>
+<hr class="section__break" />
+
+<section class="js-api-result section__api-result"></section>

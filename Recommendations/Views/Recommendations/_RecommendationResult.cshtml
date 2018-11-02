@@ -1,0 +1,22 @@
+﻿@model Recommendations.Models.RecommendationResultViewModel
+@{
+    Layout = null;
+}
+
+<div class="api-result">
+    
+    <div class="api-result__title-wrapper">
+        <h2 class="api-result__section-title">Dina rekommendationer</h2>
+    </div>
+    <div class="api-result__section-wrapper">
+        @foreach (var tracksItem in Model.Tracks)
+        {
+            var image = tracksItem.Album.Images.FirstOrDefault();
+            var imageUrl = image != null ? image.Url : @"/Content/Image/music.png";
+            <a href="@tracksItem.ExternUrls.Values.FirstOrDefault()" class="api-result__item">
+                <img class="api-result__item-img" src="@imageUrl" />
+                <p class="api-result__item-name">@tracksItem.Name</p>
+            </a>
+        }
+    </div>
+</div>
